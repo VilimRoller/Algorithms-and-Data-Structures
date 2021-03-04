@@ -2,7 +2,6 @@
 
 enum class DistributionType {
 	Uniform,
-	Bernoulli,
 	Binomial,
 	NegativeBinomial,
 	Geometric,
@@ -16,8 +15,5 @@ enum class DistributionType {
 	ChiSquared,
 	Cauchy,
 	Fischer_f,
-	Student_t,
-	Discrete,
-	PieceWiseConstant,
-	PieceWiseLinear
+	Student_t
 };
