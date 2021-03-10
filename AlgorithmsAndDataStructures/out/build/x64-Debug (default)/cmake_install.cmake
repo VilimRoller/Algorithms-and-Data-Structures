@@ -33,9 +33,18 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for each subdirectory.
-  include("C:/Users/Husky/source/repos/Algorithms-and-Data-Structures/AlgorithmsAndDataStructures/out/build/x64-Debug (default)/AlgorithmsAndDataStructures/cmake_install.cmake")
+  # Include the install script for the subdirectory.
+  include("C:/Users/Husky/source/repos/Algorithms-and-Data-Structures/AlgorithmsAndDataStructures/out/build/x64-Debug (default)/src/cmake_install.cmake")
+endif()
 
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/Users/Husky/source/repos/Algorithms-and-Data-Structures/AlgorithmsAndDataStructures/out/build/x64-Debug (default)/tst/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/Users/Husky/source/repos/Algorithms-and-Data-Structures/AlgorithmsAndDataStructures/out/build/x64-Debug (default)/lib/googletest/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)

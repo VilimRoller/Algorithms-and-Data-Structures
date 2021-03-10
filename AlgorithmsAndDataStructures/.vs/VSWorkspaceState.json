@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\AlgorithmsAndDataStructures"
+    "\\src",
+    "\\tst"
   ],
-  "SelectedNode": "\\AlgorithmsAndDataStructures\\AlgorithmsAndDataStructures.cpp",
+  "SelectedNode": "\\src\\CMakeLists.txt",
   "PreviewInSolutionExplorer": false
 }
