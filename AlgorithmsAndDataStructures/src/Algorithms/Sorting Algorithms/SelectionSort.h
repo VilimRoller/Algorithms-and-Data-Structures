@@ -1,8 +1,4 @@
 #pragma once
-
-#include <string>
-#include <iterator>
-#include <algorithm>
 #include "Algorithms/Algorithm.h"
 
 class SelectionSort final : 
@@ -10,7 +6,17 @@ class SelectionSort final :
 
 public:
 	SelectionSort() {
-		SetAlgorithmInfo("Selection Sort", "O(n^2)", "O(1)");
+		SetAlgorithmInfo("Selection Sort", "O(N^2)", "O(N^2)", "O(N^2)", "O(1)");
+	}
+
+	~SelectionSort() = default;
+
+	void SortVector(const vector_iterator_int begin_it, const vector_iterator_int end_it) override {
+		SortContainer(begin_it, end_it);
+	}
+
+	void SortVector(const vector_iterator_big_obj begin_it, const vector_iterator_big_obj end_it) override {
+		SortContainer(begin_it, end_it);
 	}
 
 	template <class container_type>

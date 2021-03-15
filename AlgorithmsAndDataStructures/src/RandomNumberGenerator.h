@@ -15,10 +15,10 @@ class RandomNumberGenerator {
 
 public:
 	RandomNumberGenerator() {
-		CheckType();
+		//CheckType();
 	}
 
-	void SetRange(const GENERATED_TYPE bottom_limit, const GENERATED_TYPE upper_limit) noexcept {
+	void SetRange(const long bottom_limit, const long upper_limit) noexcept {
 		range_ = std::make_pair(bottom_limit, upper_limit);
 	}
 
@@ -108,7 +108,7 @@ public:
 			return GetStudent_tValueDistributionValues(num_of_elements);
 			break;
 		default:
-			return std::vector<GENERATED_TYPE>();
+			return GetNoDistributionValues(num_of_elements);
 		}
 	}
 
@@ -140,6 +140,19 @@ private:
 
 		for (std::size_t i = std::size_t(0); i < num_of_elements; ++i)
 			return_value.emplace_back(static_cast<GENERATED_TYPE>(distribution(random_number_engine_)));
+
+		return std::move(return_value);
+	}
+
+	[[nodiscard]] std::vector<GENERATED_TYPE> GetNoDistributionValues(const std::size_t num_of_elements) const noexcept {
+		std::vector<GENERATED_TYPE> return_value;
+		std::random_device random_device_;
+		std::mt19937_64 random_number_engine_(random_device_());
+
+		return_value.reserve(num_of_elements);
+
+		for (std::size_t i = std::size_t(0); i < num_of_elements; ++i)
+			return_value.emplace_back(static_cast<GENERATED_TYPE>(random_number_engine_()));
 
 		return std::move(return_value);
 	}
@@ -272,17 +285,17 @@ private:
 	/*------------------------------------------------------------------------------------------------------------------------------*/
 	
 
-	RangePair range_ = std::make_pair(std::numeric_limits<long>::min(), std::numeric_limits<long>::max());
+	RangePair range_ = std::make_pair(-100, 100);
 
 	double probability_ = 0.1;										//Binomial, Negative binomial, Geometric
 	double mean_ = 1.0;												//Poisson, Normal
-	double lambda_ = 0.5;											//Exponential
+	double lambda_ = 0.3;											//Exponential
 	std::pair<double, double> alpha_beta_{ 1.0, 1.0 };				//Gamma
 	std::pair<double, double> ab_parameters_{ 1.0, 1.0 };			//Weibull, Extreme value, Cauchy
 
 	double stdev_ = 0.5;											//Normal
 	std::pair<double, double> ms_parameters_{1.0, 1.0};				//LogNormal
-	double degrees_of_freedom_ = 1.0;								//Chi squared, Student_t
+	double degrees_of_freedom_ = 1000.0;							//Chi squared, Student_t
 	std::pair<double, double> mn_degrees_of_freedom_{ 1.0, 1.0 };	//Fischer
 
 };

@@ -1,44 +1,27 @@
-﻿// AlgorithmsAndDataStructures.cpp : Defines the entry point for the application.
-//
+﻿#include "AlgorithmsAndDataStructures.h"
 
-#include "AlgorithmsAndDataStructures.h"
+constexpr const int num_of_vectors = 1000;
+constexpr const int step_size = 100;
 
-#include <memory>
-#include <array>
-#include <vector>
-#include <future>
+void StartBigObjBenchmark(const DistributionType distribution) {
+	SortingAlgorithmBenchmark<BigObject<long long>> benchmark;
+	benchmark.StartBenchmark(distribution, num_of_vectors, step_size, "_BigObj");
+}
 
-int main()
-{
-	RandomNumberGenerator<int> generator;
-	generator.SetRange(-10, 10);
+void StartIntBenchmark(const DistributionType distribution) {
+	SortingAlgorithmBenchmark<int> benchmark;
+	benchmark.StartBenchmark(distribution, num_of_vectors, step_size, "_int");
+}
 
-	Timer t1;
-	//auto sorter = std::make_unique<SelectionSort<int>>();
-	
-	QuickSort selection_sorter;
-	QuickSort selection_sorter2;
-	
-	//auto rand_values = generator.GetGeneratedValues(DistributionType::Uniform, 1000);
-	auto rand_values = std::make_unique<std::vector<int>>(generator.GetGeneratedValues(DistributionType::Uniform, 10));
-	auto rand_values2 = std::make_unique<std::vector<int>>(*rand_values);
+void StartBenchmarks(const DistributionType distribution) {
+	StartIntBenchmark(distribution);
+	StartBigObjBenchmark(distribution);
+}
 
-	std::vector<int> test_arr{8, 7, 1, 1, 9, 1, 1};
-
-	t1.Start();
-	selection_sorter.SortContainer(*rand_values);
-	t1.Stop();
-	selection_sorter.GetAlgorithmInfo().PrintAlgoInfo();
-
-	t1.PrintTimeInMiliSeconds();
-
-
-	
-	for (const auto value : *rand_values) {
-		std::cout << value << " ";
-	}
-	
-
-
-	return 0;
+int main() {
+	StartBenchmarks(DistributionType::Uniform);
+	StartBenchmarks(DistributionType::NO_DISTRIBUTION);
+	StartBenchmarks(DistributionType::ChiSquared);
+	StartBenchmarks(DistributionType::Exponential);
+	StartBenchmarks(DistributionType::Binomial);
 }

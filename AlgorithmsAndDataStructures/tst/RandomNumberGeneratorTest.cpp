@@ -10,7 +10,7 @@ protected:
 	}
 
 	void GenerateRandomValuesForAllDistributionsAndTypes(const std::size_t num_of_elements) {
-		GenerateRandomValuesForAllDistributions(num_of_elements, int_generator_,		all_distributions_generated_int_);
+		GenerateRandomValuesForAllDistributions(num_of_elements, int_generator_,	all_distributions_generated_int_);
 		GenerateRandomValuesForAllDistributions(num_of_elements, float_generator_,	all_distributions_generated_float_);
 		GenerateRandomValuesForAllDistributions(num_of_elements, double_generator_,	all_distributions_generated_double_);
 		GenerateRandomValuesForAllDistributions(num_of_elements, long_generator_,	all_distributions_generated_long_);

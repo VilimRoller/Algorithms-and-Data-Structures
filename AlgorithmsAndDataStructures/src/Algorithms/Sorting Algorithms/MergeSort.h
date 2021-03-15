@@ -7,7 +7,17 @@ class MergeSort final :
 public:
 
 	MergeSort() {
-		SetAlgorithmInfo("Merge Sort", "O(n*logn)", "O(n)");
+		SetAlgorithmInfo("Merge Sort", "O(N*logN)", "O(N*logN)", "O(N*logN)", "O(N)");
+	}
+
+	~MergeSort() = default;
+
+	void SortVector(const vector_iterator_int begin_it, const vector_iterator_int end_it) override {
+		SortContainer(begin_it, end_it);
+	}
+
+	void SortVector(const vector_iterator_big_obj begin_it, const vector_iterator_big_obj end_it) override {
+		SortContainer(begin_it, end_it);
 	}
 
 	template <class container_type>

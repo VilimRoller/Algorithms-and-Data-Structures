@@ -24,7 +24,7 @@ public:
 		measured_time_ = end_time_ - start_time_;
 	}
 
-	[[nodiscard]] const double GetMeasuredTimeInMicroseconds() const noexcept {
+	[[nodiscard]] const long double GetMeasuredTimeInMicroseconds() const noexcept {
 		return measured_time_.count();
 	}
 
@@ -48,12 +48,10 @@ public:
 		std::cout << "Elapsed time = " << GetMeasuredTimeInSeconds() << "s" << std::endl;
 	}
 
-
-
 private:
 	std::chrono::time_point<std::chrono::high_resolution_clock> start_time_ = std::chrono::high_resolution_clock::now();
 	std::chrono::time_point<std::chrono::high_resolution_clock> end_time_ = std::chrono::high_resolution_clock::now();
 
-	std::chrono::duration<double, std::micro> measured_time_;
+	std::chrono::duration<long double, std::micro> measured_time_;
 };
 

@@ -1,17 +1,22 @@
 #pragma once
-
-#include <string>
-#include <iterator>
-#include <algorithm>
 #include "Algorithms/Algorithm.h"
-
 
 class InsertionSort final : 
 	public Algorithm {
 
 public:
 	InsertionSort() {
-		SetAlgorithmInfo("Insertion Sort", "O(n^2)", "O(1)");
+		SetAlgorithmInfo("Insertion Sort", "O(N)", "O(N^2)", "O(N^2)", "O(1)");
+	}
+
+	~InsertionSort() = default;
+
+	void SortVector(const vector_iterator_int begin_it, const vector_iterator_int end_it) override {
+		SortContainer(begin_it, end_it);
+	}
+
+	void SortVector(const vector_iterator_big_obj begin_it, const vector_iterator_big_obj end_it) override {
+		SortContainer(begin_it, end_it);
 	}
 
 	template <class container_type>

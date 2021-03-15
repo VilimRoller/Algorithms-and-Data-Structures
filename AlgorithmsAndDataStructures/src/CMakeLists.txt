@@ -5,8 +5,8 @@ file(GLOB_RECURSE SOURCES LIST_DIRECTORIES true *.h *.cpp)
 
 set(SOURCES ${SOURCES})
 
-add_executable(${BINARY}_run ${SOURCES})
+add_executable(${BINARY}_run ${SOURCES}    "Algorithms/Sorting Algorithms/ShellSort.h" "Algorithms/SortingAlgorithmBenchmark.h" "Algorithms/BigObject.h")
 
-add_library(${BINARY}_lib STATIC ${SOURCES})
+add_library(${BINARY}_lib STATIC ${SOURCES}    "Algorithms/Sorting Algorithms/ShellSort.h" "Algorithms/SortingAlgorithmBenchmark.h" "Algorithms/BigObject.h")
 
 

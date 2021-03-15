@@ -16,11 +16,12 @@ enum class DistributionType {
 	ChiSquared,
 	Cauchy,
 	Fischer_f,
-	Student_t
+	Student_t,
+	NO_DISTRIBUTION
 };
 
 namespace Distributions {
-	constexpr int number_of_types = 15;
+	constexpr int number_of_types = 16;
 
 	const std::array<DistributionType, number_of_types> all_distributions_enums{
 		DistributionType::Uniform,
@@ -37,6 +38,7 @@ namespace Distributions {
 		DistributionType::ChiSquared,
 		DistributionType::Cauchy,
 		DistributionType::Fischer_f,
-		DistributionType::Student_t };
+		DistributionType::Student_t,
+		DistributionType::NO_DISTRIBUTION };
 }
 
