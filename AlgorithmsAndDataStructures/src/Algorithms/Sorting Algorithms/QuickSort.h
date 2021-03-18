@@ -1,8 +1,8 @@
 #pragma once
-#include "Algorithms/Algorithm.h"
+#include "SortingAlgorithm.h"
 
 class QuickSort final : 
-	public Algorithm {
+	public SortingAlgorithm {
 
 public:
 	QuickSort() {

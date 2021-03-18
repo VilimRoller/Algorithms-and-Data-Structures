@@ -65,7 +65,7 @@ private:
 			MeasureSortExecutionTimeForAllVectorSizes(sorter);
 	}
 
-	void MeasureSortExecutionTimeForAllVectorSizes(const std::shared_ptr<Algorithm> sorter) noexcept {
+	void MeasureSortExecutionTimeForAllVectorSizes(const std::shared_ptr<SortingAlgorithm> sorter) noexcept {
 		std::vector<long double> sorting_times;
 
 		for (auto& random_data_element_vector : random_data_element_vectors_)
@@ -76,14 +76,14 @@ private:
 
 	template<class random_data_vector>
 	void FlushCacheAndMeasureSortExecutionTime(random_data_vector& random_data_element_vector, std::vector<long double>& sorting_times,
-		const std::shared_ptr<Algorithm> sorter) noexcept {
+		const std::shared_ptr<SortingAlgorithm> sorter) noexcept {
 		FlushCache();
 		MeasureSortExecutionTime(random_data_element_vector, sorting_times, sorter);
 	}
 
 	template<class random_data_vector>
 	void MeasureSortExecutionTime(random_data_vector random_data_element_vector, std::vector<long double>& sorting_times,
-					const std::shared_ptr<Algorithm> sorter) noexcept {
+					const std::shared_ptr<SortingAlgorithm> sorter) noexcept {
 		
 		benchmark_timer_.Start();
 		sorter->SortVector(random_data_element_vector.begin(), random_data_element_vector.end());
@@ -121,7 +121,7 @@ private:
 		results_file_ << "\n";
 	}
 
-	void WriteSortingAlgorithmDataToFile(const std::shared_ptr<Algorithm> sorter, int& sort_counter) noexcept {
+	void WriteSortingAlgorithmDataToFile(const std::shared_ptr<SortingAlgorithm> sorter, int& sort_counter) noexcept {
 		WriteAlgorithmInfoToFile(sorter->GetAlgorithmInfo());
 		WriteSortingTimeToFile(all_sorting_times_[sort_counter]);
 
@@ -220,7 +220,7 @@ private:
 	std::vector<std::vector<sorting_data>> random_data_element_vectors_;
 	std::vector<std::vector<long double>> all_sorting_times_;
 
-	const std::vector<std::shared_ptr<Algorithm>> all_sorts_{ 
+	const std::vector<std::shared_ptr<SortingAlgorithm>> all_sorts_{ 
 		std::make_shared<BubbleSort>(),
 		std::make_shared<HeapSort>(),
 		std::make_shared<InsertionSort>(),

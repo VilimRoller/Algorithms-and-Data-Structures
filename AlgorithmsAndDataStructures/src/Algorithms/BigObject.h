@@ -48,11 +48,7 @@ public:
 		return left.data != right.data;
 	}
 
-
 	data_type data;
-
 private:
-
 	std::array<data_type, number_of_array_elems> unused_data_;
-
 };

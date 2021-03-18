@@ -1,9 +1,9 @@
 #pragma once
-#include "Algorithms/Algorithm.h"
+#include "SortingAlgorithm.h"
 
 
 class HeapSort final :
-	public Algorithm {
+	public SortingAlgorithm {
 
 public:
 	HeapSort() {

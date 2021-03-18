@@ -1,9 +1,8 @@
 #pragma once
-#include "Algorithms/Algorithm.h"
-#include "InsertionSort.h"
+#include "SortingAlgorithm.h"
 
 class ShellSort final :
-	public Algorithm {
+	public SortingAlgorithm {
 
 public:
 	ShellSort() {

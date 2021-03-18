@@ -4,8 +4,8 @@
 #include <algorithm>
 #include <utility>
 #include <vector>
-#include "AlgorithmInfo.h"
-#include "BigObject.h"
+#include "../AlgorithmInfo.h"
+#include "../BigObject.h"
 
 template <class container_it>
 struct Container {
@@ -22,10 +22,10 @@ enum class SortingType {
 using vector_iterator_int = std::vector<int>::iterator;
 using vector_iterator_big_obj = std::vector<BigObject<long long>>::iterator;
 
-class Algorithm {
+class SortingAlgorithm {
 
 public:
-	Algorithm() = default;
+	SortingAlgorithm() = default;
 
 	virtual void SortVector(const vector_iterator_int begin_it, const vector_iterator_int end_it) = 0;
 	virtual void SortVector(const vector_iterator_big_obj begin_it, const vector_iterator_big_obj end_it) = 0;

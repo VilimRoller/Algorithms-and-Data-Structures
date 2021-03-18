@@ -3,11 +3,11 @@
 #include <string>
 #include <iterator>
 #include <algorithm>
-#include "Algorithms/Algorithm.h"
+#include "SortingAlgorithm.h"
 
 
 class BubbleSort final : 
-	public Algorithm {
+	public SortingAlgorithm {
 
 public:
 	BubbleSort() {
