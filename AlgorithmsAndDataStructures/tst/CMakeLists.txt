@@ -5,7 +5,7 @@ file(GLOB_RECURSE TEST_SOURCES LIST_DIRECTORIES false *.h *.cpp)
 
 set(SOURCES ${TEST_SOURCES})
 
-add_executable(${BINARY} ${TEST_SOURCES} "Algorithms/Sorting Algorithms/HeapSortTest.cpp"    "Algorithms/Sorting Algorithms/ShellSortTest.cpp")
+add_executable(${BINARY} ${TEST_SOURCES}   "Data Structures/StackTest.cpp" "Data Structures/QueueTest.cpp" "Data Structures/DoublyLinkedListTest.cpp" "Data Structures/BinarySearchTreeTest.cpp" "Data Structures/MatrixTest.cpp" "Data Structures/VectorTest.cpp")
 
 add_test(NAME ${BINARY} COMMAND ${BINARY})
 

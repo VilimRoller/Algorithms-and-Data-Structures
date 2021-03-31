@@ -1,5 +1,5 @@
 #pragma once
-#include "AlgorithmIncludes.h"
+#include "SortingAlgorithmIncludes.h"
 #include "Timer.h"
 #include "RandomNumberGenerator.h"
 #include <vector>
@@ -9,9 +9,9 @@
 #include <fstream>
 #include <string>
 #include <utility>
+#include <cstring>
+#include "Benchmark.h"
 
-constexpr const std::int32_t LLC_size = 1024 * 1024 * 2; // 8MB
-inline const std::string line_separator = "\n|-------------------------------------------------------------------------------------------|\n";
 constexpr const int num_of_random_element_vectors = 10;
 
 template<class sorting_data>
@@ -21,10 +21,10 @@ public:
 	SortingAlgorithmBenchmark() = default;
 
 	void StartBenchmark(const DistributionType distribution_type, const int num_of_vector_sizes, 
-						const int vector_size_step, const std::string& file_name_suffix) noexcept {
+						const int vector_step_size, const std::string& file_name_suffix) noexcept {
 		
 		SetDistributionType(distribution_type);
-		InitializeRandomElementVectorSizes(num_of_vector_sizes, vector_size_step);
+		InitializeRandomElementVectorSizes(num_of_vector_sizes, vector_step_size);
 		SetOutputFileNameSuffix(file_name_suffix);
 		SetOutputFileName();
 		GenerateRandomDataVectors(distribution_type);
@@ -77,7 +77,7 @@ private:
 	template<class random_data_vector>
 	void FlushCacheAndMeasureSortExecutionTime(random_data_vector& random_data_element_vector, std::vector<long double>& sorting_times,
 		const std::shared_ptr<SortingAlgorithm> sorter) noexcept {
-		FlushCache();
+		Benchmark::FlushCache();
 		MeasureSortExecutionTime(random_data_element_vector, sorting_times, sorter);
 	}
 
@@ -189,16 +189,6 @@ private:
 		}
 	}
 
-	void FlushCache() noexcept {
-		volatile const std::size_t bigger_than_cache = std::size_t(LLC_size * 2); 
-		volatile long long* random_data = new long long[bigger_than_cache];
-
-		for (volatile std::size_t i = std::size_t(0); i < bigger_than_cache; ++i)
-			random_data[i] = std::rand();
-
-		delete[] random_data;
-	}
-
 	void ResetAllData() noexcept {
 		name_of_used_distribution_.clear();
 		output_file_name_.clear();
@@ -231,4 +221,7 @@ private:
 
 	std::ofstream results_file_;
 	bool is_file_open_ = false;
+
+	static inline const std::string line_separator = "\n|-------------------------------------------------------------------------------------------|\n";
+
 };

@@ -285,7 +285,7 @@ private:
 	/*------------------------------------------------------------------------------------------------------------------------------*/
 	
 
-	RangePair range_ = std::make_pair(-100, 100);
+	RangePair range_ = std::make_pair(-100000, 100000);
 
 	double probability_ = 0.1;										//Binomial, Negative binomial, Geometric
 	double mean_ = 1.0;												//Poisson, Normal

@@ -4,5 +4,5 @@
 #include "RandomNumberGenerator.h"
 #include "Algorithms/SortingAlgorithmBenchmark.h"
 #include "Algorithms/BigObject.h"
-#include "Algorithms/AlgorithmIncludes.h"
+#include "Algorithms/SortingAlgorithmIncludes.h"
 
