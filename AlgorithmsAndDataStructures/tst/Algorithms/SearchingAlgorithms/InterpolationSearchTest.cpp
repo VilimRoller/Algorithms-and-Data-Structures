@@ -49,28 +49,6 @@ TEST_F(InterpolationSearchTest, SortedVectorSearch) {
 }
 
 TEST_F(InterpolationSearchTest, BigVectorSearch) {
-	auto random_vector = GetRandomSortedVector(100000);
-
-	auto first_element_it = random_vector.begin();
-	auto last_element_it = random_vector.end() - 1;
-	auto middle_element_it = first_element_it + (last_element_it - first_element_it) / 2;
-
-	EXPECT_EQ(*first_element_it, *(interpolation_searcher_.FindValue(random_vector.begin(), random_vector.end(), *first_element_it)));
-	EXPECT_EQ(*last_element_it, *(interpolation_searcher_.FindValue(random_vector.begin(), random_vector.end(), *last_element_it)));
-	EXPECT_EQ(*middle_element_it, *(interpolation_searcher_.FindValue(random_vector.begin(), random_vector.end(), *middle_element_it)));
-}
-
-
-/*
-TEST_F(InterpolationSearchTest, SortedVectorSearch) {
-	auto random_vector = GetRandomSortedVector(100);
-	auto random_vector_iterator_pairs = GetIteratorPairs(random_vector.begin(), random_vector.end());
-
-	for (const auto& iterator_pair : random_vector_iterator_pairs)
-		EXPECT_EQ(*iterator_pair.first, *iterator_pair.second);
-}
-
-TEST_F(InterpolationSearchTest, BigVectorSearch) {
 	auto random_vector = GetRandomSortedVector(1000);
 
 	auto first_element_it = random_vector.begin();
@@ -82,15 +60,4 @@ TEST_F(InterpolationSearchTest, BigVectorSearch) {
 	EXPECT_EQ(*middle_element_it, *(interpolation_searcher_.FindValue(random_vector.begin(), random_vector.end(), *middle_element_it)));
 }
 
-TEST_F(InterpolationSearchTest, NoElementFound) {
-	auto odd_numofvalues_vec = { 1, 3, 4, 5, 6 };
-	auto even_numofvalues_vec = { 1, 2, 4, 5, 6, 7 };
 
-	auto found_it1 = interpolation_searcher_.FindValue(odd_numofvalues_vec.begin(), odd_numofvalues_vec.end(), 2);
-	auto found_it2 = interpolation_searcher_.FindValue(odd_numofvalues_vec.begin(), odd_numofvalues_vec.end(), 3);
-
-	EXPECT_EQ(odd_numofvalues_vec.end(), interpolation_searcher_.FindValue(odd_numofvalues_vec.begin(), odd_numofvalues_vec.end(), 2));
-	EXPECT_EQ(even_numofvalues_vec.end(), interpolation_searcher_.FindValue(even_numofvalues_vec.begin(), even_numofvalues_vec.end(), 3));
-}
-
-*/
