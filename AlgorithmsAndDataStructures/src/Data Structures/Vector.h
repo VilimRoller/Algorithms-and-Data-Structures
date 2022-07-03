@@ -30,13 +30,24 @@ public:
 
 	const data_type pop_back() {
 		--size_;
+		return object_handle_[size_];
 	}
 
-	void reserve(const std::size_t num_of_elements) {
+	void reserve(const std::size_t num_of_elements) noexcept {
 		if (num_of_elements > size_)
-			capacity_ = num_of_elements;
+			reserveCapacity(num_of_elements);
 	}
-	void erase();
+
+	void reserveCapacity(const std::size_t num_of_elements) noexcept {
+		capacity_ = num_of_elements;
+		ReallocateMemoryToCapacitySize();
+	}
+
+	void clear() noexcept {
+		size_ = 0;
+		capacity_ = 0;
+		ReallocateMemoryToCapacitySize();
+	}
 
 	[[nodiscard]] const std::size_t size() const noexcept {
 		return size_;
@@ -68,11 +79,14 @@ private:
 
 	void ReallocateMemoryToCapacitySize() noexcept {
 		std::unique_ptr<data_type[]> object_handle_tmp = std::make_unique<data_type[]>(capacity_);
-
-		for (std::size_t i{ 0 }; i < size_ - 1; ++i)
-			object_handle_tmp[i] = std::move(object_handle_[i]);
-
+		MoveElementsToNewLocation(object_handle_tmp);
 		object_handle_ = std::move(object_handle_tmp);
+	}
+
+	void MoveElementsToNewLocation(std::unique_ptr<data_type[]>& destination) noexcept {
+		if (size_ > std::size_t{ 1 })
+			for (std::size_t i{ 0 }; i < size_ - std::size_t{ 1 }; ++i)
+				destination[i] = std::move(object_handle_[i]);
 	}
 
 	std::unique_ptr<data_type[]> object_handle_;
@@ -183,7 +197,6 @@ public:
 			return std::distance(other.GetPtr(), this->GetPtr());
 		}
 	};
-
 
 	struct ReverseIterator {
 
@@ -299,5 +312,4 @@ public:
 	ReverseIterator rend() {
 		return ReverseIterator(&object_handle_[-1]);
 	}
-
 };

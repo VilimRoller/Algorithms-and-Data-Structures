@@ -54,4 +54,16 @@ TEST_F(StackTest, PopElement) {
 	EXPECT_EQ(test_stack.size(), 0);
 }
 
+TEST_F(StackTest, IsStackEmpty) {
+	Stack<int> test_stack;
+
+	EXPECT_TRUE(test_stack.is_empty());
+
+	test_stack.push(1);
+	EXPECT_FALSE(test_stack.is_empty());
+
+	test_stack.pop();
+	EXPECT_TRUE(test_stack.is_empty());
+}
+
 

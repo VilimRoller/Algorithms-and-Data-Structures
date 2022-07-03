@@ -26,6 +26,18 @@ TEST_F(VectorTest, EmplaceBack) {
 	EXPECT_EQ(vec_test_int.capacity(), std::size_t(2));
 }
 
+TEST_F(VectorTest, PopBack) {
+	Vector<int> vec_test_int;
+
+	vec_test_int.emplace_back(1);
+	vec_test_int.emplace_back(2);
+
+	EXPECT_EQ(vec_test_int.pop_back(), 2);
+	EXPECT_EQ(vec_test_int.pop_back(), 1);
+
+	EXPECT_EQ(vec_test_int.size(), std::size_t(0));
+}
+
 TEST_F(VectorTest, AccessData) {
 	Vector<int> vec_test_int;
 
@@ -41,7 +53,10 @@ TEST_F(VectorTest, ReserveMemory) {
 
 	vec_test_int.reserve(50);
 
-	EXPECT_EQ(vec_test_int.size(), 0);
+	for (int i = 0; i < 10; ++i)
+		vec_test_int.emplace_back(i);
+
+	EXPECT_EQ(vec_test_int.size(), 10);
 	EXPECT_EQ(vec_test_int.capacity(), 50);
 }
 
@@ -68,6 +83,37 @@ TEST_F(VectorTest, IncreasingCapacitySize) {
 
 	vec_test_int.emplace_back(3);
 	EXPECT_EQ(vec_test_int.capacity(), std::size_t(4));
+}
+
+TEST_F(VectorTest, ClearVector) {
+	Vector<int> vec_test_int;
+
+	vec_test_int.reserve(50);
+	vec_test_int.emplace_back(1);
+	vec_test_int.emplace_back(2);
+	vec_test_int.emplace_back(3);
+
+	vec_test_int.clear();
+
+	EXPECT_EQ(vec_test_int.size(), 0);
+	EXPECT_EQ(vec_test_int.capacity(), 0);
+}
+
+TEST_F(VectorTest, AddingElementsAfterClearing) {
+	Vector<int> vec_test_int;
+
+	vec_test_int.reserve(50);
+	for (int i = 0; i < 10; ++i)
+		vec_test_int.emplace_back(i);
+
+	vec_test_int.clear();
+
+	for (int i = 0; i < 10; ++i)
+		vec_test_int.emplace_back(i);
+
+	EXPECT_EQ(vec_test_int.size(), 10);
+	EXPECT_EQ(vec_test_int.capacity(), 16);
+	EXPECT_EQ(vec_test_int[5], 5);
 }
 
 TEST_F(VectorTest, AddingBigNumberOfElements) {
@@ -329,14 +375,6 @@ TEST_F(VectorTest, ReverseIteratorBooleanOperatorGreaterOrEqual) {
 	EXPECT_TRUE(reverse_it3 >= reverse_it2);
 	EXPECT_FALSE(reverse_it1 >= reverse_it2);
 }
-
-
-
-
-
-
-
-
 
 TEST_F(VectorTest, IteratorBooleanOperatorLesser) {
 	Vector<int> vec_test_int;
