@@ -1,3 +1,15 @@
 AlgorithmsAndDataStructures/.vs
 AlgorithmsAndDataStructures/out
 AlgorithmsAndDataStructures/lib
+AlgorithmsAndDataStructures/CMakeFiles
+
+*.o
+*.obj
+*.exe
+*.out
+/CMakeLists.txt.user
+/CMakeCache.txt
+/CMakeFiles/
+/CMakeScripts/
+.idea
+MakeFile*
