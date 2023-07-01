@@ -1,15 +1,10 @@
 import matplotlib.pyplot as plt
 
-fileName = "Uniform distribution benchmark results_BigObj.txt"
-numberOfSortingAlgorithms = 7
-windowTitle = "Sorting algorithms benchmark"
-plotTitle = "Sorting algorithms execution time"
-objectType = "~1,6 KB objects"
 xAxisLabel = "Number of vector elements"
 yAxisLabel = "Execution time [us]"
 
-def getPlotTitle(DistributionType):
-    return plotTitle + " for " + DistributionType + " for " + objectType
+def getPlotTitle(distributionType, plotTitle):
+    return plotTitle + " for " + distributionType + " using type: " + objectType
 
 def openDataFile(nameOfFile):
     file = open(nameOfFile, "r")
@@ -32,7 +27,7 @@ def getAlgorithmName(DataFile):
     return dataLine[2] + " " + dataLine[3]
 
 def getAlgorithmMeasuredTimes(DataFile):
-    StringList = DataFile.readline().split()[3:]
+    StringList = DataFile.readline().split()[2:]
     FloatList = [float(i) for i in StringList]
     return FloatList
 
@@ -41,11 +36,11 @@ def fillAlgorithmData(AlgoNames, AlgoTimes, NumberOfAlgos, DataFile):
         AlgoNames.append(getAlgorithmName(DataFile))
         skipLines(DataFile, 6)
         AlgoTimes.append(getAlgorithmMeasuredTimes(DataFile))
-        skipLines(DataFile, 1)
+        skipLines(DataFile, 2)
 
-def setPlotWindow():
+def setPlotWindow(distributionName, windowTitle, plotTitle):
     fig = plt.figure(windowTitle, figsize=(15, 10))
-    fig.suptitle(getPlotTitle(nameOfDistribution))
+    fig.suptitle(getPlotTitle(distributionName, plotTitle))
     ax = fig.add_subplot(1, 1, 1)
     setAxisLabels(ax)
     return fig, ax
@@ -54,27 +49,39 @@ def setAxisLabels(ax):
     ax.set_xlabel(xAxisLabel)
     ax.set_ylabel(yAxisLabel)
 
-def plotAllAlgorithms(ax, xAxis, AlgorithmMeasuredTimes, AlgorithmNames, numberOfSortingAlgorithms):
-    for algoIndex in range(numberOfSortingAlgorithms):
+def plotAllAlgorithms(ax, xAxis, AlgorithmMeasuredTimes, AlgorithmNames, numberOfAlgorithms):
+    for algoIndex in range(numberOfAlgorithms):
         ax.plot(xAxis, AlgorithmMeasuredTimes[algoIndex], label=AlgorithmNames[algoIndex])
 
-def showPlotWindow(ax):
+def plotResults(filePath, numberOfAlgorithms, windowTitle, plotTitle, objectType):
+    DataFile = openDataFile(filePath)
+    AlgorithmNames = []
+    AlgorithmMeasuredTimes = []
+
+    distributionName = getNameOfDistribution(DataFile)
+    xAxis = getXAxisData(DataFile)
+    skipLines(DataFile, 2)
+
+    fillAlgorithmData(AlgorithmNames, AlgorithmMeasuredTimes, numberOfAlgorithms, DataFile)
+
+    fig, ax = setPlotWindow(distributionName, windowTitle, plotTitle)
+    plotAllAlgorithms(ax, xAxis, AlgorithmMeasuredTimes, AlgorithmNames, numberOfAlgorithms)
     ax.legend()
-    plt.show()
+    DataFile.close()
 
-DataFile = openDataFile(fileName)
-AlgorithmNames = []
-AlgorithmMeasuredTimes = []
+searchResultFilePath = "AlgorithmsAndDataStructures/Search Algorithms Benchmark.txt"
+numberOfSearchAlgorithms = 4
+searchWindowTitle = "Search algorithms benchmark"
+searchPlotTitle = "Search algorithms execution time"
+objectType = "int"
 
-nameOfDistribution = getNameOfDistribution(DataFile)
-xAxis = getXAxisData(DataFile)
-skipLines(DataFile, 2)
-fillAlgorithmData(AlgorithmNames, AlgorithmMeasuredTimes, numberOfSortingAlgorithms, DataFile)
+sortResultFilePath = "AlgorithmsAndDataStructures/Uniform distribution benchmark results.txt"
+numberOfSortAlgorithms = 7
+sortWindowTitle = "Sort algorithms benchmark"
+sortPlotTitle = "Sort algorithms execution time"
 
-fig, ax = setPlotWindow()
 
-plotAllAlgorithms(ax, xAxis, AlgorithmMeasuredTimes, AlgorithmNames, numberOfSortingAlgorithms)
+plotResults(searchResultFilePath, numberOfSearchAlgorithms, searchWindowTitle, searchPlotTitle, objectType)
+plotResults(sortResultFilePath, numberOfSortAlgorithms, sortWindowTitle, sortPlotTitle, objectType)
 
-showPlotWindow(ax)
-
-DataFile.close()
+plt.show()

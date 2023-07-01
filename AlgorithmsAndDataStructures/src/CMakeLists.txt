@@ -1,12 +1,29 @@
-﻿#src
-set(BINARY ${CMAKE_PROJECT_NAME})
+set(SOURCE_FILES
+    Algorithms/AlgorithmInfo.h
+    Algorithms/SearchAlgorithms/BinarySearch.h
+    Algorithms/SearchAlgorithms/InterpolationSearch.h
+    Algorithms/SearchAlgorithms/JumpSearch.h
+    Algorithms/SearchAlgorithms/LinearSearch.h
+    Algorithms/SearchAlgorithms/SearchAlgorithm.h
+    Algorithms/SortAlgorithms/BubbleSort.h
+    Algorithms/SortAlgorithms/HeapSort.h
+    Algorithms/SortAlgorithms/InsertionSort.h
+    Algorithms/SortAlgorithms/MergeSort.h
+    Algorithms/SortAlgorithms/QuickSort.h
+    Algorithms/SortAlgorithms/SelectionSort.h
+    Algorithms/SortAlgorithms/ShellSort.h
+    Algorithms/SortAlgorithms/SortAlgorithm.h
+    Algorithms/BigObject.h
+    Benchmark/Benchmark.h
+    Benchmark/DistributionType.h
+    Benchmark/RandomNumberGenerator.h
+    Benchmark/SearchAlgorithmsBenchmark.h
+    Benchmark/SortAlgorithmsBenchmark.h
+    Benchmark/Timer.h
+    DataStructures/Queue.h
+    DataStructures/Stack.h
+    DataStructures/Vector.h
+    main.cpp
+)
 
-file(GLOB_RECURSE SOURCES LIST_DIRECTORIES true *.h *.cpp)
-
-set(SOURCES ${SOURCES})
-
-add_executable(${BINARY}_run ${SOURCES} "Algorithms/Benchmark.h"  "Data Structures/Vector.h" "Data Structures/Stack.h"   "Data Structures/BinarySearchTree.h" "Data Structures/DoublyLinkedList.h" "Data Structures/Queue.h" "Data Structures/Matrix.h" "Data Structures/Array.h" "Data Structures/HashTable.h" "Data Structures/Map.h" "Data Structures/Graph.h" "Data Structures/Heap.h")
-
-add_library(${BINARY}_lib STATIC ${SOURCES} "Algorithms/Benchmark.h"  "Data Structures/Vector.h" "Data Structures/Stack.h"   "Data Structures/BinarySearchTree.h" "Data Structures/DoublyLinkedList.h" "Data Structures/Queue.h" "Data Structures/Matrix.h" "Data Structures/Array.h" "Data Structures/HashTable.h" "Data Structures/Map.h" "Data Structures/Graph.h" "Data Structures/Heap.h")
-
-
+add_executable(AlgorithmsAndDataStructures ${SOURCE_FILES})
