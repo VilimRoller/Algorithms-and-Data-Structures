@@ -50,6 +50,10 @@ public:
 		ReallocateMemoryToCapacitySize();
 	}
 
+	[[nodiscard]] const bool isEmpty() const noexcept {
+		return size() == std::size_t(0);
+	}
+
 	[[nodiscard]] const std::size_t size() const noexcept {
 		return size_;
 	}

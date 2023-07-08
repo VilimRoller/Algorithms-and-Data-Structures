@@ -23,6 +23,7 @@ set(SOURCE_FILES
     DataStructures/Queue.h
     DataStructures/Stack.h
     DataStructures/Vector.h
+    DataStructures/LinkedListNode.h
     main.cpp
 )
 
