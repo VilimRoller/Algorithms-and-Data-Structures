@@ -1,7 +1,6 @@
 ﻿#include "Benchmark/SearchAlgorithmsBenchmark.h"
 #include "Benchmark/SortAlgorithmsBenchmark.h"
 
-
 int main() {
 	const int numOfVectorSizes = 100;
 	const int vectorSizeStep = 10;

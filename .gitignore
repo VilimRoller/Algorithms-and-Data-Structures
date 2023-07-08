@@ -7,9 +7,9 @@ AlgorithmsAndDataStructures/CMakeFiles
 *.obj
 *.exe
 *.out
-/CMakeLists.txt.user
-/CMakeCache.txt
-/CMakeFiles/
-/CMakeScripts/
+*CMakeLists.txt.user
+*CMakeCache.txt
+*CMakeFiles/
+*CMakeScripts/
 .idea
 MakeFile*
